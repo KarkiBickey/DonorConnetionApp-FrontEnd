@@ -1,0 +1,62 @@
+android {
+    buildTypes {
+        debug {
+            minifyEnabled false
+            testCoverageEnabled false
+            debuggable true
+            applicationIdSuffix ".donorconnect.debug"
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
+            buildConfigField("String", "APP_TYPE", '"donor_connect"')
+            buildConfigField("String", "APP_NAME", '"DonorConnect Debug"')
+            resValue "string", "APP_NAME", "Donor Connect Debug"
+            buildConfigField("String", "API_URL", '"http://192.168.100.37:8000/"')
+//            buildConfigField("String", "API_URL", '"http://127.0.0.1:8000/"')
+//            buildConfigField("String", "API_URL", '"http://192.168.1.4:8000/"')
+            manifestPlaceholders = [
+                    appIcon     : "@mipmap/ic_launcher_round",
+                    appIconRound: "@mipmap/ic_launcher_round"
+            ]
+        }
+        release {
+            minifyEnabled false
+            shrinkResources false
+            debuggable false
+            buildConfigField("String", "API_URL", '"https://api3.sunya.health/"')
+            applicationIdSuffix ".donorconnect"
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "APP_TYPE", '"donor_connect"')
+            buildConfigField("String", "APP_NAME", '"DonorConnect"')
+            resValue "string", "APP_NAME", "DonorConnect"
+            manifestPlaceholders = [
+                    appIcon     : "@mipmap/ic_launcher_round",
+                    appIconRound: "@mipmap/ic_launcher_round"
+            ]
+        }
+        demo {
+            minifyEnabled false
+            shrinkResources false
+            debuggable false
+            buildConfigField("String", "API_URL", '"http://192.168.100.37:8000/"')
+//            buildConfigField("String", "API_URL", '"http://127.0.0.1:8000/"')
+//            buildConfigField("String", "API_URL", '"http://192.168.1.78:8000/"')
+            applicationIdSuffix ".donorconnect.demo"
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "APP_TYPE", '"donor_connect"')
+            buildConfigField("String", "APP_NAME", '"DonorConnect Demo"')
+            resValue "string", "APP_NAME", "DonorConnect"
+            manifestPlaceholders = [
+                    appIcon     : "@mipmap/ic_launcher_round",
+                    appIconRound: "@mipmap/ic_launcher_round"
+            ]
+        }
+
+        android.applicationVariants.all { variant ->
+            variant.outputs.all { output ->
+                def appName = "DonorConnectionApp"
+                outputFileName = appName + "-${output.baseName}-${variant.versionName}.apk"
+            }
+        }
+    }
+
+}
